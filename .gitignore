@@ -1,0 +1,63 @@
+# 🧾 공통
+.DS_Store
+node_modules/
+*.log
+.env
+*.env.local
+*.swp
+.vscode/
+.idea/
+*.bak
+
+#──────────────
+# 📦 Frontend (Vue.js)
+#──────────────
+lua-monologue-frontend/dist/
+lua-monologue-frontend/node_modules/
+lua-monologue-frontend/.output/
+lua-monologue-frontend/.vitepress/
+lua-monologue-frontend/.cache/
+lua-monologue-frontend/package-lock.json # 선택 (의도적이면 커밋 가능)
+lua-monologue-frontend/public/assets/
+lua-monologue-frontend/.env*
+
+#──────────────
+# 🐹 Middleend (Go)
+#──────────────
+lua-monologue-middleend/bin/
+lua-monologue-middleend/pkg/
+lua-monologue-middleend/.exe
+lua-monologue-middleend/.out
+lua-monologue-middleend/*.test
+lua-monologue-middleend/coverage.out
+
+# Go build artifacts
+*.test
+*.exe
+*.out
+
+#──────────────
+# 🦀 Backend (Rust)
+#──────────────
+lua-monologue-backend/target/
+lua-monologue-backend/Cargo.lock # 선택 (라이브러리면 커밋 제외해도 됨)
+lua-monologue-backend/.cargo/
+lua-monologue-backend/.rs.bk
+lua-monologue-backend/.env
+
+#──────────────
+# 🧪 Testing & coverage
+#──────────────
+coverage/
+coverage-final.json
+lcov.info
+
+#──────────────
+# ⛔ Ignore temporary or local-only files
+#──────────────
+*.tmp
+*.log
+*.bak
+*.old
+*.orig
+*.rej
