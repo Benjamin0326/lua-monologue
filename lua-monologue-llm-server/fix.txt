@@ -1,0 +1,3 @@
+netstat -ano | findstr :11434
+tasklist /FI "PID eq 14488"
+taskkill /PID 14488 /F

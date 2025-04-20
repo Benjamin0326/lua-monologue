@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
+	grpcclient "lua-monologue-middleend/internal/grpc"
+	"lua-monologue-middleend/internal/llmclient"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +25,30 @@ func HandleChatMessagePost(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("📌 받은 일기 내용:", req)
-	c.JSON(http.StatusOK, gin.H{"message": "채팅 수신 완료", "data": req})
+	// "content" 키가 있는지 확인
+	contentRaw, ok := req["content"]
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "content 필드가 없습니다"})
+		return
+	}
+
+	// 타입이 string인지 확인
+	contentStr, ok := contentRaw.(string)
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "content 필드는 문자열이어야 합니다"})
+		return
+	}
+
+	// LLM 통신
+	response, err := llmclient.CallLLM(contentStr)
+	if err != nil {
+		fmt.Println("❌ 오류:", err)
+		return
+	}
+
+	fmt.Println("🧠 LLM 응답:", response)
+
+	fmt.Println("📌 받은 일기 내용:", contentStr)
+	c.JSON(http.StatusOK, gin.H{"message": "채팅 수신 완료", "data": response})
+	grpcclient.SendChatMessage(contentStr)
 }

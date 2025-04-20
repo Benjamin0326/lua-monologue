@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	grpcclient "lua-monologue-middleend/internal/grpc"
 	"lua-monologue-middleend/internal/handlers"
 	"lua-monologue-middleend/internal/middleware"
 
@@ -12,7 +11,16 @@ import (
 )
 
 func main() {
-	grpcclient.SendChatMessage("안녕 Lua Rust Server야 ㅎㅎ")
+	/*
+		grpcclient.SendChatMessage("안녕 Lua Rust Server야 ㅎㅎ")
+		response, err := llmclient.CallLLM("오늘 기분 어때?")
+		if err != nil {
+			fmt.Println("❌ 오류:", err)
+			return
+		}
+
+		fmt.Println("🧠 LLM 응답:", response)
+	*/
 
 	router := gin.Default()
 	router.Use(middleware.SetupCors())
