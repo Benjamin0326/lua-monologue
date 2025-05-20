@@ -13,7 +13,7 @@ import (
 
 const serverAddress = "localhost:50051"
 
-func SendChatMessage(message string) {
+func SendChatMessage(message string, role string, user_id string) {
 	conn, err := grpc.Dial(serverAddress, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
@@ -26,7 +26,7 @@ func SendChatMessage(message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	req := &pb.ChatRequest{Content: message}
+	req := &pb.ChatRequest{Content: message, Role: role, Id: user_id}
 	res, err := client.SendMessage(ctx, req)
 	if err != nil {
 		log.Fatalf("Error sending message: %v", err)

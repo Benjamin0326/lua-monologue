@@ -8,6 +8,8 @@ service ChatService {
 
 message ChatRequest {
     string content = 1;
+    string role = 2;
+    string id = 3;
 }
 
 message ChatResponse {

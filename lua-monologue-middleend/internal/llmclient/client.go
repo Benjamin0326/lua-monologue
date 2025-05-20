@@ -8,8 +8,9 @@ import (
 	"net/http"
 )
 
-func CallLLM(prompt string) (string, error) {
+func CallLLM(id string, prompt string) (string, error) {
 	data := map[string]string{
+		"id":     id,
 		"prompt": prompt,
 	}
 
@@ -17,6 +18,8 @@ func CallLLM(prompt string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	fmt.Println("📤 보내는 JSON:", string(jsonData))
 
 	resp, err := http.Post("http://localhost:4321/generate", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {

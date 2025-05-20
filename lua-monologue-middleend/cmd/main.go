@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"lua-monologue-middleend/internal/db"
 	"lua-monologue-middleend/internal/handlers"
 	"lua-monologue-middleend/internal/middleware"
 
@@ -22,9 +23,21 @@ func main() {
 		fmt.Println("🧠 LLM 응답:", response)
 	*/
 
+	db.InitDB()
+
 	router := gin.Default()
 	router.Use(middleware.SetupCors())
-	router.POST("/sendchatmessage", handlers.HandleChatMessagePost)
+
+	router.POST("/sendjoininfo", handlers.HandleRegister)
+	router.POST("/sendloginfo", handlers.HandleLogin)
+	router.POST("/sendlogout", handlers.HandleLogout)
+	router.POST("/refresh", handlers.Refresh)
+
+	protected := router.Group("/")
+	protected.Use(middleware.AuthMiddleware())
+
+	protected.POST("/sendchatmessage", handlers.HandleChatMessagePost)
+	protected.GET("/getchatmessages", handlers.HandleChatMessageGet)
 
 	port := 8080
 	log.Printf("✅ 서버 실행 중: http://localhost:%d", port)
