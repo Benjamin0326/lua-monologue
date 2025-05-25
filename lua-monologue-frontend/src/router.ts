@@ -6,7 +6,8 @@ import Login from '@/pages/Login.vue';
 import Join from '@/pages/Join.vue';
 
 const routes = [
-    { path: '/', component: Home},
+    //{ path: '/', component: Home},
+    { path: '/', component: Chat},
     { path: '/login', component: Login},
     { path: '/join', component: Join},
     { path: '/diary', component: Diary},
