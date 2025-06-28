@@ -65,6 +65,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .connect(&db_url)
         .await?;
 
+    /* 
     // 테스트용 INSERT
     let user_id = "user-test";
     let role = "user"; // 또는 "assistant"
@@ -78,7 +79,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .execute(&pool)
     .await?;
-
+    
     let role = "assistant"; // 또는 "assistant"
     let content = "고생 많았어!";
 
@@ -92,7 +93,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .await?;
 
     println!("✅ 메시지 저장 완료!");
-
+    */
     //let addr = "[::1]:50051".parse()?;
     let addr = "127.0.0.1:50051".parse()?;
     let svc = LuaChatService::default();
