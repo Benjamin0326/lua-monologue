@@ -32,7 +32,6 @@ impl ChatService for LuaChatService {
             .connect(&db_url)
             .await.unwrap();
 
-        // 테스트용 INSERT
         let user_id = req_user_id;
         let role = req_role; // 또는 "assistant"
         let content = req_msg;
@@ -53,10 +52,9 @@ impl ChatService for LuaChatService {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    /* 
     dotenv::dotenv().ok();
-
     let db_url = env::var("DATABASE_URL").expect("DATABASE_URL not set");
-
     println!("📦 연결 주소: {}", db_url);
 
     // DB 풀 연결
@@ -65,7 +63,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .connect(&db_url)
         .await?;
 
-    /* 
     // 테스트용 INSERT
     let user_id = "user-test";
     let role = "user"; // 또는 "assistant"
